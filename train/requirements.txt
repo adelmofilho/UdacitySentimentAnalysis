@@ -1,5 +1,8 @@
-pandas
-numpy
-nltk
 beautifulsoup4
-html5lib
+boto3
+nltk
+numpy
+pandas
+scikit-learn
+torch
+tqdm

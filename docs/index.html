@@ -21,8 +21,7 @@
         function submitForm(oFormElement) {
             var xhr = new XMLHttpRequest();
             xhr.onload = function () {
-                //  var result = parseFloat(xhr.responseText);
-                var result = 1
+                var result = parseFloat(xhr.responseText);
                 var resultElement = document.getElementById('result');
                 var modalTitleElement = document.getElementById('modalTitle');
                 if (result == 0) {
@@ -45,7 +44,7 @@
 
 <body>
     <div class="jumbotron">
-        <h1 class="display-4">Let Yourself Feel Your Emotions</h1>
+        <h1 class="display-4" id="titulo">Let Yourself Feel Your Emotions</h1>
         <p class="lead">A Web app to predict how positive or negative are your fellings about anything</p>
         <hr class="my-4">
         <p>Udacity Machine Learning Engineer Nanodegree Project: Sentimment Analysis</p>

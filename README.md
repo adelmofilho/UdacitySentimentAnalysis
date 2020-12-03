@@ -4,10 +4,7 @@
 <br>
 
 ## Description
-*TL;DR: blog.adelmofilho.com/UdacitySentimentAnalysis*
-
-
-
+*TL;DR*: blog.adelmofilho.com/UdacitySentimentAnalysis
 
 
 

@@ -1,5 +1,16 @@
-# SageMaker Deployment Project
+# Sentiment Analysis Deployment Project
+### *Udacity Machine Learning Nanodegree*
 
-The notebook and Python files provided here, once completed, result in a simple web app which interacts with a deployed recurrent neural network performing sentiment analysis on movie reviews. This project assumes some familiarity with SageMaker, the mini-project, Sentiment Analysis using XGBoost, should provide enough background.
+<br>
 
-Please see the [README](https://github.com/udacity/sagemaker-deployment/tree/master/README.md) in the root directory for instructions on setting up a SageMaker notebook and downloading the project files (as well as the other notebooks).
+## Description
+*TL;DR*: blog.adelmofilho.com/UdacitySentimentAnalysis
+
+
+
+<center>
+<img src="https://i.imgur.com/89xoYJv.png">
+</center>
+
+
+## 

@@ -13,7 +13,7 @@ The notebook `Sagemaker Project.ipynb` and the codes on `train` and `server` fol
 
 - User experience was improved by the use of the raw model response instead of binary response, which allows a continuous interpreation of results meaning.
 
-- Modelling and data preparation were improved by:
+- Modelling and data preparation methodologies were improved by:
 
     - Addition of a validation set to prevent overfitting;
     - Implementation of hyperparameter tunning jobs to search for the best model hyperparameters;

@@ -102,7 +102,7 @@ def train(model, train_loader, valid_loader, epochs, optimizer, loss_fn, device)
         if valid_BCELoss < best_valid_BCELoss: 
             best_model = model
             best_valid_BCELoss = valid_BCELoss
-        print("Epoch: {}, BCELoss: {}".format(epoch, valid_BCELoss))
+        print("Epoch: {}; BCELoss: {};".format(epoch, valid_BCELoss))
        
     return best_model
 

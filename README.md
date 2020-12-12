@@ -30,7 +30,7 @@ The notebook `Sagemaker Project.ipynb` and the codes on `train` and `server` fol
 
 ## Answered Questions
 
-### Above we mentioned that `review_to_words` method removes html formatting and allows us to tokenize the words found in a review, for example, converting entertained and entertaining into entertain so that they are treated as though they are the same word. What else, if anything, does this method do to the input?  
+`Above we mentioned that `review_to_words` method removes html formatting and allows us to tokenize the words found in a review, for example, converting entertained and entertaining into entertain so that they are treated as though they are the same word. What else, if anything, does this method do to the input?`
 
 Despite Html removing and word tokenizing, `review_to_words` method removes stopwords (i.e. very common words from a language) to reduce noise from data, lowercases all words in order to avoid distinct tokeninzation of a same word and, finnaly, splits each words as a list element.
 

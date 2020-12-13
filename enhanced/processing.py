@@ -85,7 +85,7 @@ def build_dict(data, vocab_size = 5000):
     return word_dict, sorted_words, word_count
 
 
-def update_dict(word_dict, words_to_remove=[]):
+def update_save_dict(word_dict, pytorch_dir, words_to_remove=[]):
     updated_dict = word_dict.copy()
     for word in words_to_remove:
         updated_dict.pop(word)
@@ -94,6 +94,12 @@ def update_dict(word_dict, words_to_remove=[]):
         updated_dict[token] = updated_dict[token] - len(words_to_remove)
         
     new_vocab_size = len(updated_dict) + 2
+
+    if not os.path.exists(pytorch_dir):
+        os.makedirs(pytorch_dir)
+
+    with open(os.path.join(pytorch_dir, 'word_dict_enhanced.pkl'), "wb") as f:
+        pickle.dump(word_dict, f)
     
     return updated_dict, new_vocab_size
 

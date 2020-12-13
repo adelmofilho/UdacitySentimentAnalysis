@@ -3,7 +3,7 @@
 
 <br>
 
-*TL;DR*: blog.adelmofilho.com/UdacitySentimentAnalysis
+*TL;DR*: [blog.adelmofilho.com/UdacitySentimentAnalysis](blog.adelmofilho.com/UdacitySentimentAnalysis)
 
 ## Before we start...
 
@@ -76,3 +76,11 @@ LSTM models are recurrent neural networks where data flows across multiple activ
 As each model deals with its internal parameter optimization differently it is expected different performances despite the same dataset.
 
 Finally, "which model is better?" is relative. But, as this is a sentimental analysis problem and interpretation is something desirable, one would pick a XGBoost model because of its simplicty over LSTM archicteture, therefore more interpretable.
+
+<br>
+
+> Give an example of a review that you entered into your web app. What was the predicted sentiment of your example review?
+
+<br>
+
+<img src="https://i.imgur.com/OOShk8E.gif">

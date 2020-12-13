@@ -42,10 +42,10 @@ def model_fn(model_dir):
     print("Done loading model.")
     return model
 
-def _get_train_data_loader(batch_size, training_dir):
+def _get_train_data_loader(batch_size, training_dir, file):
     print("Get train data loader.")
 
-    train_data = pd.read_csv(os.path.join(training_dir, "train.csv"), header=None, names=None)
+    train_data = pd.read_csv(os.path.join(training_dir, file), header=None, names=None)
 
     train_y = torch.from_numpy(train_data[[0]].values).float().squeeze()
     train_X = torch.from_numpy(train_data.drop([0], axis=1).values).long()
@@ -55,7 +55,7 @@ def _get_train_data_loader(batch_size, training_dir):
     return torch.utils.data.DataLoader(train_ds, batch_size=batch_size)
 
 
-def train(model, train_loader, epochs, optimizer, loss_fn, device):
+def train(model, train_loader, valid_loader, epochs, optimizer, loss_fn, device):
     """
     This is the training method that is called by the PyTorch training script. The parameters
     passed are as follows:
@@ -68,10 +68,12 @@ def train(model, train_loader, epochs, optimizer, loss_fn, device):
     """
     
     # TODO: Paste the train() method developed in the notebook here.
-
+    
+    best_valid_BCELoss = 9999999999
     for epoch in range(1, epochs + 1):
         model.train()
         total_loss = 0
+        total_valid_loss = 0        
         for batch in train_loader:         
             batch_X, batch_y = batch
             
@@ -79,17 +81,30 @@ def train(model, train_loader, epochs, optimizer, loss_fn, device):
             batch_y = batch_y.to(device)
             
             # TODO: Complete this train method to train the model provided.
-            
             optimizer.zero_grad()
             output = model(batch_X)
             loss = loss_fn(output, batch_y)
             loss.backward()
-            optimizer.step()
-            
-            
+            optimizer.step()            
             total_loss += loss.data.item()
-        print("Epoch: {}, BCELoss: {}".format(epoch, total_loss / len(train_loader)))
+        for block in valid_loader:     
+            block_X, block_y = block
+            
+            block_X = block_X.to(device)
+            block_y = block_y.to(device)
+            output_valid = model(block_X)
+            valid_loss = loss_fn(output_valid, block_y)
+            total_valid_loss += valid_loss.data.item()
+        BCELoss = total_loss/len(train_loader)
+  
+        valid_BCELoss = total_valid_loss/len(valid_loader)
 
+        if valid_BCELoss < best_valid_BCELoss: 
+            best_model = model
+            best_valid_BCELoss = valid_BCELoss
+        print("Epoch: {}; BCELoss: {};".format(epoch, valid_BCELoss))
+       
+    return best_model
 
 if __name__ == '__main__':
     # All of the model parameters and training parameters are sent as arguments when the script
@@ -128,7 +143,8 @@ if __name__ == '__main__':
     torch.manual_seed(args.seed)
 
     # Load the training data.
-    train_loader = _get_train_data_loader(args.batch_size, args.data_dir)
+    train_loader = _get_train_data_loader(args.batch_size, args.data_dir, "train.csv")
+    valid_loader = _get_train_data_loader(args.batch_size, args.data_dir, "valid.csv")
 
     # Build the model.
     model = LSTMClassifier(args.embedding_dim, args.hidden_dim, args.vocab_size).to(device)
@@ -144,7 +160,7 @@ if __name__ == '__main__':
     optimizer = optim.Adam(model.parameters())
     loss_fn = torch.nn.BCELoss()
 
-    train(model, train_loader, args.epochs, optimizer, loss_fn, device)
+    best_model = train(model, train_loader, valid_loader, args.epochs, optimizer, loss_fn, device)
 
     # Save the parameters used to construct the model
     model_info_path = os.path.join(args.model_dir, 'model_info.pth')
@@ -159,9 +175,9 @@ if __name__ == '__main__':
 	# Save the word_dict
     word_dict_path = os.path.join(args.model_dir, 'word_dict.pkl')
     with open(word_dict_path, 'wb') as f:
-        pickle.dump(model.word_dict, f)
+        pickle.dump(best_model.word_dict, f)
 
 	# Save the model parameters
     model_path = os.path.join(args.model_dir, 'model.pth')
     with open(model_path, 'wb') as f:
-        torch.save(model.cpu().state_dict(), f)
+        torch.save(best_model.cpu().state_dict(), f)

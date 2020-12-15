@@ -99,12 +99,12 @@ def train(model, train_loader, valid_loader, epochs, optimizer, loss_fn, device)
   
         valid_BCELoss = total_valid_loss/len(valid_loader)
 
-        # if valid_BCELoss < best_valid_BCELoss: 
-        #     best_model = model
-        #     best_valid_BCELoss = valid_BCELoss
-        print("Epoch: {}; BCELoss: {};".format(epoch, BCELoss))
+        if valid_BCELoss < best_valid_BCELoss: 
+            best_model = model
+            best_valid_BCELoss = valid_BCELoss
+        print("Epoch: {}; BCELoss: {};".format(epoch, valid_BCELoss))
        
-    #return best_model
+    return best_model
 
 if __name__ == '__main__':
     # All of the model parameters and training parameters are sent as arguments when the script
@@ -160,8 +160,7 @@ if __name__ == '__main__':
     optimizer = optim.Adam(model.parameters())
     loss_fn = torch.nn.BCELoss()
 
-    #best_model = 
-    train(model, train_loader, valid_loader, args.epochs, optimizer, loss_fn, device)
+    model = train(model, train_loader, valid_loader, args.epochs, optimizer, loss_fn, device)
 
     # Save the parameters used to construct the model
     model_info_path = os.path.join(args.model_dir, 'model_info.pth')

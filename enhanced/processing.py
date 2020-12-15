@@ -98,7 +98,7 @@ def update_save_dict(word_dict, pytorch_dir, words_to_remove=[]):
     if not os.path.exists(pytorch_dir):
         os.makedirs(pytorch_dir)
 
-    with open(os.path.join(pytorch_dir, 'word_dict_enhanced.pkl'), "wb") as f:
+    with open(os.path.join(pytorch_dir, 'word_dict.pkl'), "wb") as f:
         pickle.dump(word_dict, f)
     
     return updated_dict, new_vocab_size

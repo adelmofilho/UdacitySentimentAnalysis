@@ -83,6 +83,14 @@ Finally, "which model is better?" is relative. But, as this is a sentimental ana
 
 <br>
 
+### Standard Model
+
 <p align="center">
 <img src="https://i.imgur.com/OOShk8E.gif">
+    </p>
+
+### Detailed Model
+
+<p align="center">
+<img src="https://i.imgur.com/SCd77Hs.gif">
     </p>

@@ -89,6 +89,8 @@ Finally, "which model is better?" is relative. But, as this is a sentimental ana
 <img src="https://i.imgur.com/OOShk8E.gif">
     </p>
 
+<br>
+
 ### Detailed Model
 
 <p align="center">

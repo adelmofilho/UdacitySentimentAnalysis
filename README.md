@@ -9,6 +9,8 @@
 
 The notebook `Sagemaker Project.ipynb` and the codes on `train` and `server` folder were completed (questions and TODO codes) without any improvement in order to keep a baseline to be compared with proposed modifications at notebook `Sagemaker Project Enhanced.ipynb` and codes on `enhanced` folder.
 
+A `docs` folder was creted copying the contents of `website` folder in order to use the github pages feature to host the project website. In both folders a `enhanced.html` file implements a more detailed visualization of model results.
+
 ## What makes this project special?
 
 - Website appearance was improved by the use of [boostrap library](https://getbootstrap.com/);
@@ -19,7 +21,6 @@ The notebook `Sagemaker Project.ipynb` and the codes on `train` and `server` fol
 
     - Addition of a validation set to prevent overfitting;
     - Implementation of hyperparameter tunning jobs to search for the best model hyperparameters;
-    - The most frequent and less-informative words are removed from the vocabulary
 
 ## Description
 
